@@ -21,5 +21,6 @@ $params = @{
     }
 }
 $connection = Invoke-RestMethod @params
-Connect-MgGraph -AccessToken $connection.access_token
+$secureAccessToken = ConvertTo-SecureString -String $connection.access_token -AsPlainText -Force
+Connect-MgGraph -AccessToken $secureAccessToken
 Export-Entra -Path "$Path/export" -ErrorAction "SilentlyContinue"
